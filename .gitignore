@@ -1,0 +1,23 @@
+*.DS_Store
+.cache/
+/app.tar
+/app/
+site/
+*.bak
+__pycache__
+.venv
+.idea
+.kiro
+*.egg-info
+
+node_modules
+uv.lock
+
+sdk-typescript
+package-lock.json
+
+# Generated documentation
+docs/api-reference/
+__*__/
+
+
