@@ -1,0 +1,20 @@
+https://github.com/anbunathanr/aws-workshop5-agentic-workflows
+https://github.com/strands-agents/docs
+
+Module1:
+https://github.com/strands-agents/docs/blob/main/docs/examples/python/mcp_calculator.py
+
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+python3 -m venv .venv && source .venv/bin/activate
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows
+sudo apt-get update && sudo apt-get install -y portaudio19-dev
+pip3 install -e .
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+python3 mcp_calculator.py
+
+module2:
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+python3 weather_forecaster.py
+
+module3
+https://github.com/aws-samples/amazon-bedrock-samples/tree/main/agents-and-function-calling/bedrock-agents/features-examples/05-create-agent-with-knowledge-base-and-action-group

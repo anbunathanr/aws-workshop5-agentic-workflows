@@ -63,8 +63,51 @@ Strands Agents' http_request tool provides:
    - "Get the forecast for San Francisco"
 """
 
-from strands import Agent
-from strands_tools import http_request
+import requests
+from strands import Agent, tool
+
+@tool
+def http_request(method: str, url: str, headers: dict = None, params: dict = None, json_data: dict = None) -> dict:
+    """Make HTTP requests to external APIs.
+    
+    Args:
+        method: HTTP method (GET, POST, PUT, DELETE)
+        url: The URL to make the request to
+        headers: Optional headers dictionary
+        params: Optional query parameters dictionary
+        json_data: Optional JSON data for POST/PUT requests
+        
+    Returns:
+        Dictionary containing the response data
+    """
+    try:
+        response = requests.request(
+            method=method.upper(),
+            url=url,
+            headers=headers or {},
+            params=params or {},
+            json=json_data
+        )
+        response.raise_for_status()
+        
+        # Try to return JSON if possible, otherwise return text
+        try:
+            return {
+                "status_code": response.status_code,
+                "data": response.json(),
+                "headers": dict(response.headers)
+            }
+        except ValueError:
+            return {
+                "status_code": response.status_code,
+                "data": response.text,
+                "headers": dict(response.headers)
+            }
+    except requests.RequestException as e:
+        return {
+            "error": str(e),
+            "status_code": getattr(e.response, 'status_code', None) if hasattr(e, 'response') else None
+        }
 
 # Define a weather-focused system prompt
 WEATHER_SYSTEM_PROMPT = """You are a weather assistant with HTTP capabilities. You can:
