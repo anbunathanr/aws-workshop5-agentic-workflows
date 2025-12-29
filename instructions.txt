@@ -9,6 +9,18 @@ python3 -m venv .venv && source .venv/bin/activate
 cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows
 sudo apt-get update && sudo apt-get install -y portaudio19-dev
 pip3 install -e .
+-------------------
+# 1) Remove the wrong package if it partially installed
+python3 -m pip uninstall -y strands
+
+# 2) Install the correct Strands Agents packages
+python3 -m pip install -U pip
+python3 -m pip install -U strands-agents strands-agents-tools
+# Check the installation
+python3 -c "from strands import Agent; import strands_tools; from strands_tools import http_request; print('OK')"
+# Observe OK
+-------------------
+
 cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
 python3 mcp_calculator.py
 
@@ -62,3 +74,16 @@ D:\shared\trial\aws-workshop5-agentic-workflows\pets_agent_demo.py
 
 Run the following:
 python3 pets_agent_demo.py
+
+# Module 4: Building Workflow Agent with Strands
+D:\shared\trial\aws-workshop5-agentic-workflows\docs\examples\python\agents_workflow.py
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+python3 agents_workflow.py
+---------
+Feature	        Description
+Tools Used	http_request
+Agent Structure	Multi-Agent Workflow (3 Agents)
+Complexity	Intermediate
+Interaction	Command Line Interface
+Key Technique	Agent-to-Agent Communication
+---------
