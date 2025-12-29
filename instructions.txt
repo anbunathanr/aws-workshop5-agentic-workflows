@@ -22,6 +22,7 @@ python3 -c "from strands import Agent; import strands_tools; from strands_tools 
 -------------------
 pip3 install mem0ai
 pip3 install faiss-cpu
+pip3 install streamlit
 
 cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
 python3 mcp_calculator.py
@@ -151,3 +152,35 @@ Input: Count the characters in "Hello, Strands! How are you today?"
 # Observe 34 characters
 
 Module 7: Building Multi-Agent with Strands
+This module contains 4 parts:
+Step 1 - Setting up Multi-Agent with Strands
+Step 2 - Adding UI to Multi-Agent with Strands
+Step 3 - Adding Knowledge Base to Multi-Agent with Strands
+Step 4 - Adding Memory to Multi-Agent with Strands
+
+Step 1 - Setting up Multi-Agent with Strands
+Feature	        Description
+Tools Used	calculator, python_repl, shell, http_request, editor, file operations
+Agent Structure	Multi-Agent Architecture
+Complexity	Intermediate
+Interaction	Command Line Interface
+Key Technique	Dynamic Query Routing
+D:\shared\trial\aws-workshop5-agentic-workflows\docs\examples\python\multi_agent_example\teachers_assistant.py
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python/multi_agent_example
+python3 teachers_assistant.py
+
+Step 2 - Adding UI to Multi-Agent with Strands
+[Option 1] Use Q Developer to create a Hello World Streamlit App
+Open Q Developer in the left side panel and type: Create a Streamlit hello world application
+D:\shared\trial\aws-workshop5-agentic-workflows\streamlit_app.py
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+streamlit run streamlit_app.py
+
+Step 3 - Adding Knowledge Base to Multi-Agent with Strands
+prompt:
+In the Streamlit application `docs\examples\python\streamlit_app.py`:
+- add the `determine_action()` subroutine from `docs\examples\python\knowledge_base_agent.py` and expand its capability to route requests to the teacher agent depending on the query.
+- requests not routed to the teacher agent should go to the knowledge base agent, that is implemented in the `run_kb_agent()` subroutine.
+# Observe streamlit_app.py is updated
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+streamlit run streamlit_app.py
