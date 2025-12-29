@@ -130,5 +130,24 @@ source ~/.bashrc
 unset OPENSEARCH_HOST
 ---------------
 D:\shared\trial\aws-workshop5-agentic-workflows\tools\src\strands_tools\mem0_memory.py
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
 python3 memory_agent.py
 
+Module 6: Building Meta Agent with Strands
+D:\shared\trial\aws-workshop5-agentic-workflows\docs\examples\python\meta_tooling.py
+-------------------------
+Feature	        Description
+Tools Used	load_tool, shell, editor
+Core Concept	Meta-Tooling (Dynamic Tool Creation)
+Complexity	Advanced
+Interaction	Command Line Interface
+Key Technique	Runtime Tool Generation
+-------------------------
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
+python3 meta_tooling.py
+Input: Create a tool that counts characters in text
+To test the tool:
+Input: Count the characters in "Hello, Strands! How are you today?"
+# Observe 34 characters
+
+Module 7: Building Multi-Agent with Strands
