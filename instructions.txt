@@ -16,5 +16,49 @@ module2:
 cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows/docs/examples/python
 python3 weather_forecaster.py
 
-module3
+module3: Quick Create Bedrock KB with Python
 https://github.com/aws-samples/amazon-bedrock-samples/tree/main/agents-and-function-calling/bedrock-agents/features-examples/05-create-agent-with-knowledge-base-and-action-group
+export AWS_DEFAULT_REGION="$AWS_REGION"
+cd /mnt/d/shared/trial/aws-workshop5-agentic-workflows
+D:\shared\trial\aws-workshop5-agentic-workflows\setup_pets_kb.py
+D:\shared\trial\aws-workshop5-agentic-workflows\pets_agent_demo.py
+pip install opensearch-py retrying requests
+python3 setup_pets_kb.py
+Manually create:
+s3->create->general purpose->name=aws-workshop5-pet
+Upload files from D:\shared\trial\aws-workshop5-agentic-workflows\pets-kb
+Bedrock->knowledge bases->create->Knowledge base with vector store->aws-workshop5-pet
+Amazon OpenSearch Service->Serverless: Security->Data access control->bedrock-knowledge-base-3ufeci->editAccessPolicy
+
+Knowledge base
+Access policy name: bedrock-knowledge-base-3ufeci
+Knowledge Base name: aws-workshop5-pet
+Knowledge Base ID: DGRJWBIGET
+Service Role: AmazonBedrockExecutionRoleForKnowledgeBase_ft1qo 
+
+Environment variable:
+export STRANDS_KNOWLEDGE_BASE_ID=$(aws bedrock-agent list-knowledge-bases --region $AWS_REGION --query 'knowledgeBaseSummaries[].knowledgeBaseId' --output text)
+export OPENSEARCH_COLLECTION_ID=$(aws opensearchserverless list-collections --query "collectionSummaries[].id" --output text)
+export OPENSEARCH_ENDPOINT=$(aws opensearchserverless batch-get-collection --ids $OPENSEARCH_COLLECTION_ID --query 'collectionDetails[].collectionEndpoint' --output text)
+export OPENSEARCH_HOST="${OPENSEARCH_ENDPOINT#https://*}"
+echo "export STRANDS_KNOWLEDGE_BASE_ID=\"${STRANDS_KNOWLEDGE_BASE_ID}\"" >> ~/.bashrc
+echo "export OPENSEARCH_HOST=\"$OPENSEARCH_HOST\"" >> ~/.bashrc
+tail -2 ~/.bashrc
+
+or
+export STRANDS_KNOWLEDGE_BASE_ID="DGRJWBIGET"
+aws opensearchserverless list-collections --query "collectionSummaries[].[name,id]" --output table
+-----------
+Based on the service role name "AmazonBedrockExecutionRoleForKnowledgeBase_ft1qo", the collection should be "bedrock-sample-rag-9761" with ID "fcjdfjp7robyhszlil9l".
+-----------
+aws opensearchserverless batch-get-collection --ids fcjdfjp7robyhszlil9l --query "collectionDetails[].collectionEndpoint" --output text
+------------------
+https://fcjdfjp7robyhszlil9l.us-east-1.aoss.amazonaws.com
+------------------
+
+Script:
+D:\shared\trial\aws-workshop5-agentic-workflows\set_kb_env.sh
+D:\shared\trial\aws-workshop5-agentic-workflows\pets_agent_demo.py
+
+Run the following:
+python3 pets_agent_demo.py
